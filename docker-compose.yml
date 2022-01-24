@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    container_name: elasticsearch
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - http.port=9401
+      - transport.port=9501
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    network_mode: "host"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.15.1
+    container_name: kib01
+    environment:
+      ELASTICSEARCH_URL: http://localhost:9401
+      ELASTICSEARCH_HOSTS: '["http://localhost:9401"]'
+    network_mode: "host"
+
+volumes:
+  elasticsearch-data:

@@ -1,0 +1,19 @@
+{
+  "name": "fryzek",
+  "version": "1.0.0",
+  "description": "The Elastic search example with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha src/**/*spec.js --reporter spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.15.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
+  }
+}
